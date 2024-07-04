@@ -11,6 +11,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
 import { Sun, Moon, CircleUser, Menu, Package2, Home, Info, FileText, Mail } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   {
