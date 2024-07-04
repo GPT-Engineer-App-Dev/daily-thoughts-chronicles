@@ -8,8 +8,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { CircleUser, Menu, Package2, Home, Info, FileText, Mail } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Sun, Moon, CircleUser, Menu, Package2, Home, Info, FileText, Mail } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 
 const navItems = [
@@ -40,13 +40,31 @@ const navItems = [
   },
 ];
 
+const ThemeToggle = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
+      {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  );
+};
+
 const Layout = () => {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 justify-between">
         <DesktopNav />
         <MobileNav />
-        <UserMenu />
+        <div className="flex items-center space-x-4">
+          <ThemeToggle />
+          <UserMenu />
+        </div>
       </header>
       <main className="flex-grow p-4 overflow-auto">
         <Outlet />
